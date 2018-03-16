@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>index</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/ad_index.css"/>
+</head>
+<body>
+    <div class="container" id="maintain">
+        <input type="text" placeholder="search" id="main_search" onkeydown="Search(event)"/>
+        <div class="row" id="main_row">
+            <div class="col-6">
+                <div class="container" id="content">
+                    <ul id="content_list">
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="container" id="jumb">
+                    <div class="jumbotron">
+                        <div class="row" id="ad_row">
+                            <div class="col-8">
+                                <div class="container" id="ad_img_div">
+                                    <img src="ad_images/ad_1.jpg" id="ad_img"/>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="container" id="ad_describe">
+                                    <p class="text-info">This is a Ad_recommendation to describe a goods</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="link_page">
+            <div class="col-12">
+                <iframe id="view_box" src="http://www.baidu.com"></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="js/ad_index.js"></script>
+</body>
+</html>
