@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
  * \
  */
 @Controller
+
 public class load_search {
 
     @GetMapping("/")
