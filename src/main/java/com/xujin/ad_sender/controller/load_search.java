@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,16 +20,11 @@ import java.util.regex.Pattern;
  * \* Time: 11:19
  * \
  */
-@Controller
+@RestController
 public class load_search {
 
-    @GetMapping("/")
-    public String ad_index() {
-        return "ad_index";
-    }
-
     @GetMapping("/baidu")
-    @ResponseBody
+//    @ResponseBody
     public Map<String, Object> loadSearch() {
         Map<String, Object> map = new HashMap<>();
         map.put("name", "xujin");
@@ -36,32 +32,7 @@ public class load_search {
         return map;
     }
 
-//    @GetMapping("/getHtml")
-//    @ResponseBody
-//    public StringBuffer getHtml() {
-//        try {
-//            URL url = new URL("http://www.baidu.com");
-//            InputStream inputStream = url.openStream();
-//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            StringBuffer str = new StringBuffer();
-//            String t;
-//            while ((t = bufferedReader.readLine()) != null) {
-//                str.append(t);
-//            }
-//            System.out.println(str);
-//            bufferedReader.close();
-//            inputStreamReader.close();
-//            inputStream.close();
-//            return str;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-
     @PostMapping("/get_search")
-    @ResponseBody
     public List<String> get_search(String keyword, String PrePageNum) {
         try {
             String[] args = new String[]{"python3.6", "/Users/xujin/Desktop/毕业设计/implement_code/ad_sender/src/main/java/com/xujin/ad_sender/py/searchData.py", keyword, PrePageNum};
