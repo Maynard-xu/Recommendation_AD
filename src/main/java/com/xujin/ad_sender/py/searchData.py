@@ -1,9 +1,9 @@
+#-*- coding:utf-8 -*-
 from urllib import request
 from urllib.parse import quote
 from lxml import etree
 import ssl
 import sys
-
 # url_basic = 'https://www.baidu.com/s?wd=%s&pn=%s'
 _context = ssl._create_unverified_context()
 
@@ -12,10 +12,10 @@ def get_html(url, search_item, page_num):
     # 这里的quote解决含中文字符的url
     req = request.Request(url % (quote(search_item), (page_num - 1) * 10))
     req.add_header('User-Agent',
-                   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) '
-                   'Chrome/64.0.3282.119 Safari/537.36')
+                   'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 '
+                   'Safari/537.36')
     response = request.urlopen(req, context=_context)
-    html = response.read().decode('utf-8')
+    html = response.read().decode('utf-8').encode('GBK','ignore').decode('GBK')
     with open('./search_page_%s.html' % page_num, 'w') as f:
         f.write(html)
 

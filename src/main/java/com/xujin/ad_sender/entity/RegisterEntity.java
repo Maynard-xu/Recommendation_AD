@@ -69,7 +69,6 @@ public class RegisterEntity {
         Age = age;
     }
 
-
     public String getHobby() {
         return Hobby;
     }
@@ -77,6 +76,7 @@ public class RegisterEntity {
     public void setHobby(String hobby) {
         Hobby = hobby;
     }
+
 
     @Override
     public String toString() {
