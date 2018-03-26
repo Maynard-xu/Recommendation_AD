@@ -58,6 +58,7 @@ public class DspIndexController {
         String url = "images/upload_images/";
         ADInfoEntity adInfoEntity = new Gson().fromJson(adInfo, ADInfoEntity.class);
         Map<String, Object> map = new HashMap<>();
+        System.out.println(adInfoEntity.getADClasses());
         adInfoEntity.setUploadPicture(url + adInfoEntity.getUploadPicture());
         adInfoService.addADInfo(adInfoEntity);
         map.put("success", true);

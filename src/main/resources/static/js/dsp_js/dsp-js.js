@@ -32,11 +32,12 @@ $(function () {
         var ADDescribe = $("#comment").val().trim();
         var RTBPrice = $("#rtbPrice").val().trim();
         //格式化请求数据
+        ADInfo["ADID"] = null;
         ADInfo["ADTitle"] = ADTitle;
         ADInfo["SelectCrowd"] = SelectCrowd;
         ADInfo["SelectGender"] = SelectGender;
-        ADInfo["pictureName"] = pictureName;
-        ADInfo["ADClasses"] = "" + ADClasses;
+        ADInfo["UploadPicture"] = pictureName;
+        ADInfo["ADClasses"] = JSON.stringify(ADClasses);
         ADInfo["ADDescribe"] = ADDescribe;
         ADInfo["RTBPrice"] = RTBPrice;
         console.log(ADInfo);
@@ -57,6 +58,7 @@ function addADInfo(ADInfo) {
         success: function (e) {
             if (e.code == 200) {
                 alert(e.message);
+                window.location.reload(true);
             } else {
                 alert(e.message);
             }
@@ -80,7 +82,7 @@ function initADList() {
                 '<tr>' +
                 '<td align="center">' + data[i]["adid"] + '</td>' +
                 '<td align="center" style="width:222px">' + data[i]["adtitle"] + '</td>' +
-                '<td align="center">' + JSON.parse(data[i]["adclasses"])["Classes"] + '</td>' +
+                '<td align="center">' + JSON.parse(data[i]["adclasses"])["ADClassesSelected"] + '</td>' +
                 '<td align="center" style="width:180px">' + data[i]["addescribe"] + '</td>' +
                 '<td align="center">' + data[i]["rtbprice"] + '</td>' +
                 '<td style="width:200px">' +

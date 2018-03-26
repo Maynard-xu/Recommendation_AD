@@ -11,6 +11,7 @@ import java.util.List;
  * \
  */
 public class ADInfoEntity {
+    private Integer ADID;
     private String ADTitle;
     private String SelectCrowd;
     private String SelectGender;
@@ -19,6 +20,13 @@ public class ADInfoEntity {
     private String ADDescribe;
     private Integer RTBPrice;
 
+    public Integer getADID() {
+        return ADID;
+    }
+
+    public void setADID(Integer ADID) {
+        this.ADID = ADID;
+    }
 
     public String getADTitle() {
         return ADTitle;
