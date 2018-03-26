@@ -1,9 +1,5 @@
 package com.xujin.ad_sender.entity;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * \* Created with IntelliJ IDEA.
  * \* Description:

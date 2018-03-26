@@ -28,10 +28,20 @@ $(function () {
 
 });
 
+/**
+ * 注册请求
+ * @param UserName
+ * @param PassWord
+ * @param Profession
+ * @param Sex
+ * @param Age
+ * @param HobbyJson
+ * @constructor
+ */
 function Register(UserName, PassWord, Profession, Sex, Age, HobbyJson) {
     $.ajax({
         method: 'POST',
-        url: '/register',
+        url: '/Register/register',
         data: {
             'UserName': UserName,
             'PassWord': PassWord,
@@ -43,7 +53,6 @@ function Register(UserName, PassWord, Profession, Sex, Age, HobbyJson) {
         success: function (e) {
             if (e.code == 200) {
                 window.location.href = "/login";
-                console.log("进来了，没跳转！");
                 alert(e.message);
             } else {
                 alert(e.message);
@@ -51,6 +60,44 @@ function Register(UserName, PassWord, Profession, Sex, Age, HobbyJson) {
         },
         error: function () {
             alert("Error!");
+        }
+    });
+}
+
+/**
+ * 初始化注册页面的选择项
+ */
+function init() {
+    initSelectProfession();
+    initSelectHobby();
+}
+
+/**
+ * 初始化职业选择项
+ */
+function initSelectProfession() {
+    $.getJSON("/getAllProfession", function (data) {
+        var ProfessionList = $("#ProfessionList");
+        for (var i in data) {
+            ProfessionList.options.add(new Option(i.ProfessionName, i.ProfessionID));
+        }
+    });
+}
+
+/**
+ * 初始化爱好选择项
+ */
+function initSelectHobby() {
+    $.getJSON("/getAllHobby", function (data) {
+        var HobbyOption = $("#HobbyOption");
+        for (var i in data) {
+            HobbyOption.append(
+                '<div class="form-check form-check-inline">' +
+                '<label class="form-check-label">' +
+                '<input type="checkbox" class="form-check-input" value="' + i.HobbyID + '"/>' + i.HobbyName +
+                '</label>' +
+                '</div>'
+            );
         }
     });
 }

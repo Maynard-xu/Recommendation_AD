@@ -1,6 +1,6 @@
 package com.xujin.ad_sender.service;
 
-import com.xujin.ad_sender.dao.UserInfo;
+import com.xujin.ad_sender.dao.UserDao;
 import com.xujin.ad_sender.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserInfo userInfo;
+    UserDao userDao;
 
     @Override
     public UserEntity searchUserByName(String username) {
-        return userInfo.searchUserByName(username);
+        return userDao.searchUserByName(username);
     }
 }

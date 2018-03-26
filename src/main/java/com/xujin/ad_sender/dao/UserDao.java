@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 //映射
 @Mapper
-public interface UserInfo {
+public interface UserDao {
 
     /**
      * 查询用户信息

@@ -3,7 +3,6 @@
  * */
 
 (function (root, factory) {
-    //@author http://ifandelse.com/its-not-hard-making-your-library-support-amd-and-commonjs/
     if (typeof module === "object" && module.exports) {
         module.exports = factory(require("jquery"));
     } else {
@@ -59,6 +58,7 @@
         var thisS = this;
         var $input = $chooseBtn.find(".ssi-uploadInput");
         $chooseBtn.find('button').click(function () {
+            //激活点击事件
             $input.trigger('click');
         });
 
@@ -66,7 +66,7 @@
             thisS.toUploadFiles(this.files);
             $input.val('');
         });
-        //drag n drop
+        //drag n drop 拖拽的区域设置
         if (thisS.options.dropZone) {
             $uploadBox.on("drop", function (e) {
                 e.preventDefault();
@@ -242,6 +242,7 @@
             }
             this.options.errorHandler.method(errorMessage, this.options.errorHandler.error);
         }
+
         function setupReader() {
             var index = thisS.totalFilesLength + thisS.pending;
             if (index === 0) {//do it only the first time
@@ -320,7 +321,7 @@
         thisS.successfulUpload = 0;
         thisS.aborted = 0;
         thisS.abortedWithError = 0;
-        if (!thisS.options.preview)$completed.prev('tr').remove();
+        if (!thisS.options.preview) $completed.prev('tr').remove();
         $completed.remove();
     };
     var clearPending = function (thisS) {//clear all pending files
@@ -335,7 +336,7 @@
         thisS.toUpload.splice(-thisS.pending, thisS.pending);
         thisS.imgNames.splice(-thisS.pending, thisS.pending);
         thisS.pending = 0;
-        if (!thisS.options.preview)$pending.prev('tr').remove();
+        if (!thisS.options.preview) $pending.prev('tr').remove();
         $pending.remove();
     };
 
@@ -411,10 +412,11 @@
             while (this.toUpload[i] === null) { // do it until you find a file
                 i++;
             }
-            formData.append('files[]', thisS.toUpload[i]);//append the first file to the form data
-            $.each(this.options.data, function (key, value) {// append all extra data
-                formData.append(key, value);
-            });
+            // formData.append('files[]', thisS.toUpload[i]);//append the first file to the form data
+            formData.append('file', thisS.toUpload[i]);//append the first file to the form data
+            // $.each(this.options.data, function (key, value) {// append all extra data
+            //     formData.append(key, value);
+            // });
             if (typeof this.options.beforeUpload === 'function') {
                 try {
                     this.options.beforeUpload();// execute the beforeUpload callback
@@ -534,6 +536,7 @@
                     }
                 }
             }, thisS.options.ajaxOptions);
+            console.log("url---------:" + ajaxOptions.url);
             $.ajax(ajaxOptions).done(function (responseData, textStatus, jqXHR) {
                 var msg, title = '', dataType = 'error', spanClass = 'exclamation', data;
                 try {
@@ -563,6 +566,7 @@
                         cb(false, data);
                     }
                 }
+
                 function cb(result, data) {
                     if (result) {//if response type is success
                         dataType = 'success';
@@ -720,11 +724,13 @@
         }
         thisS.$element.find('input.ssi-uploadInput').trigger('onUpload.ssi-uploader');
         var $uploadBtn = thisS.$element.find('#ssi-uploadBtn');
-        thisS.$element.find('#ssi-clearBtn').prop("disabled", false);
+        var $clearBtn = thisS.$element.find('#ssi-clearBtn');
+        $clearBtn.prop("disabled", false);
         $uploadBtn.prop("disabled", false)
             .find('#ssi-up_loading')
             .empty();
         if (thisS.pending === 0) {
+            $clearBtn.addClass('ssi-hidden');
             $uploadBtn.addClass('ssi-hidden');
             thisS.toUpload = [];
             thisS.imgNames = [];
@@ -793,10 +799,10 @@
         return this.split('.').pop().toLowerCase();
     };
     var cutFileName = function (word, ext, maxLength) {//shorten the name
-        if (typeof ext === 'undefined')ext = '';
-        if (typeof maxLength === 'undefined')maxLength = 10;
+        if (typeof ext === 'undefined') ext = '';
+        if (typeof maxLength === 'undefined') maxLength = 10;
         var min = 4;
-        if (maxLength < min)return;
+        if (maxLength < min) return;
         var extLength = ext.length;
         var wordLength = word.length;
         if ((wordLength - 2) > maxLength) {
@@ -820,7 +826,7 @@
         en: {
             success: 'Success',
             sucUpload: 'Successful upload',
-            chooseFiles: 'Choose Image',
+            chooseFiles: 'Choose files',
             uploadFailed: 'Upload failed',
             serverError: 'Internal server error',
             error: 'Error',

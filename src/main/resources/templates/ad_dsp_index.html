@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="css/dsp_css/ad_dsp_index.css"/>
     <link rel="stylesheet" href="css/dsp_css/ad_uploader.css"/>
     <link rel="stylesheet" type="text/css" href="css/dsp_css/ad_image_style.css"/>
+
     <!--js文件-->
     <script src="js/common_js/jquery-3.2.0.min.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
@@ -46,22 +47,23 @@
                             <div class="register_form">
                                 <div class="form-group">
                                     <label class="control-label">AD Title</label>
-                                    <input required="required" type="text" class="form-control" placeholder="请输入广告标题"/>
+                                    <input id="ad_title" required="required" type="text" class="form-control"
+                                           placeholder="请输入广告标题"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Select Crowd</label>
                                     <select class="form-control input-lg" id="peopleSelect" name="cat_id">
                                         <option value="1">青少年(13~18)</option>
-                                        <option value="1">青年(19~30)</option>
-                                        <option value="1">中年(31~50)</option>
-                                        <option value="1">老年(51~65)</option>
+                                        <option value="2">青年(19~30)</option>
+                                        <option value="3">中年(31~50)</option>
+                                        <option value="4">老年(51~65)</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Select Gender</label>
                                     <select class="form-control input-lg" id="sexSelect" name="cat_id">
                                         <option value="1">男</option>
-                                        <option value="1">女</option>
+                                        <option value="2">女</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -71,7 +73,7 @@
                                             <input type="file" multiple="" id="ssi-upload"/>
                                         </div>
                                     </div>
-                                    <label class="explain" style="color: rgba(158,158,158,0.72)">请上传一张图片，格式jpg，尺寸640*384，大小在30k之内</label>
+                                    <label class="explain" style="color: rgba(158,158,158,0.72)">请上传一张图片，格式jpg</label>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">AD Classes</label>
@@ -128,112 +130,7 @@
                     <th class="center">Options</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td align="center">1</td>
-                    <td align="center" style="width:222px">大雪进补应以温润进补食物为主</td>
-                    <td align="center">健康DIY</td>
-                    <td align="center" style="width:180px">本文文图内容综合自多...</td>
-                    <td align="center">6</td>
-                    <td style="width:200px">
-                        <div class="operation text-center">
-                            <!--编辑广告部分内容-->
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#editModal">编辑
-                            </button>
-                            <div class="modal fade text-left" id="editModal">
-                                <!--在modal-dialog后面设置模态框大小 modal-lg modal-sm-->
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <!--模态框头部-->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Edit AD Information</h4>
-                                        </div>
-                                        <!--模态框主体-->
-                                        <div class="modal-body" style="width: 100%">
-                                            <div class="register_form">
-                                                <div class="form-group">
-                                                    <label class="control-label">AD Title</label>
-                                                    <input required="required" type="text" class="form-control" placeholder="修改广告标题"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">AD Classes</label>
-                                                    <div id="editHobbyOption">
-                                                        <div class="form-check form-check-inline">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                       value="1"/>IT
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                       value="2"/>IOT
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check disabled form-check-inline">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                       value="3"/>Children
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">AD Describe</label>
-                                                    <textarea type="text" class="form-control" rows="5"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">RTB Price</label>
-                                                    <input class="form-control input-lg" type="text" name="cat_add"
-                                                           value=""
-                                                           placeholder="修改竞价价格"/>
-                                                </div>
-                                                <input type="submit" value="complete"
-                                                       class="float-right bg-success text-white" id="complete"/>
-                                                <!--<button type="button" class="btn btn-primary" id="register">Register</button>-->
-                                            </div>
-                                        </div>
-                                        <!--模态框底部-->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                关闭
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button type="button" class="btn btn-sm btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">1</td>
-                    <td align="center" style="width:222px">大雪进补应以温润进补食物为主</td>
-                    <td align="center">健康DIY</td>
-                    <td align="center" style="width:180px">本文文图内容综合自多...</td>
-                    <td align="center">6</td>
-                    <td style="width:200px">
-                        <div class="operation text-center">
-                            <button type="button" class="btn btn-sm btn-primary">编辑</button>
-                            <button type="button" class="btn btn-sm btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">1</td>
-                    <td align="center" style="width:222px">大雪进补应以温润进补食物为主</td>
-                    <td align="center">健康DIY</td>
-                    <td align="center" style="width:180px">本文文图内容综合自多...</td>
-                    <td align="center">6</td>
-                    <td style="width:200px">
-                        <div class="operation text-center">
-                            <button type="button" class="btn btn-sm btn-primary">编辑</button>
-                            <button type="button" class="btn btn-sm btn-danger">删除</button>
-                        </div>
-                    </td>
-                </tr>
+                <tbody id="ad_list">
                 </tbody>
             </table>
         </div>

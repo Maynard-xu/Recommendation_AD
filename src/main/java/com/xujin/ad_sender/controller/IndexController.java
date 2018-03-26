@@ -1,10 +1,7 @@
 package com.xujin.ad_sender.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,23 +11,15 @@ import java.util.regex.Pattern;
 
 /**
  * \* Created with IntelliJ IDEA.
- * \* Description:
+ * \* Description: 主页控制层
  * \* User: xujin
  * \* Date: 2018/1/30
  * \* Time: 11:19
  * \
  */
 @RestController
-public class load_search {
-
-    @GetMapping("/baidu")
-//    @ResponseBody
-    public Map<String, Object> loadSearch() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", "xujin");
-        map.put("age", 24);
-        return map;
-    }
+@RequestMapping("/index")
+public class IndexController {
 
     @PostMapping("/get_search")
     public List<String> get_search(String keyword, String PrePageNum) {

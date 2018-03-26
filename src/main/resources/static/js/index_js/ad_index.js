@@ -11,7 +11,7 @@ function Search(ev) {
 function get_search(keyword) {
     $.ajax({
         type: 'POST',
-        url: '/get_search',
+        url: '/index/get_search',
         data: {
             keyword: keyword,
             PrePageNum: 2
