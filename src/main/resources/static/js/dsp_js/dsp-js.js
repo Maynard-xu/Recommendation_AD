@@ -1,26 +1,81 @@
 $(function () {
+    /**
+     * 初始化广告列表
+     */
     initADList();
-    $('#ssi-upload').ssi_uploader({url: '/dsp/upload', maxFileSize: 1, allowed: ['jpg', 'gif', 'txt', 'png', 'pdf']});
-    // $("#submit").click(function () {
-    //     $("")
-    // });
-    // $("#zwb_upload").bindUpload({
-    //     url:"/dsp/upload",//上传服务器地址
-    //     callbackPath:"#callbackPath2",//绑定上传成功后 图片地址的保存容器的id或者class 必须为input或者textarea等可以使用$(..).val()设置之的表单元素
-    //     // ps:值返回上传成功的 默认id为#callbackPath  保存容器为位置不限制,id需要加上#号,class需要加上.
-    //     // 返回格式为:
-    //     // 原来的文件名,服务端保存的路径|原来的文件名,服务端保存的路径|原来的文件名,服务端保存的路径|原来的文件名,服务端保存的路径....
-    //     num:10,//上传数量的限制 默认为空 无限制
-    //     type:"jpg|png|gif|svg",//上传文件类型 默认为空 无限制
-    //     size:3//上传文件大小的限制,默认为5单位默认为mb
-    // });
+
+    /**
+     * 提交图片
+     */
+    $("#ssi-upload").ssi_uploader({url: '/dsp/upload', maxFileSize: 1, allowed: ['jpg', 'gif', 'txt', 'png', 'pdf']});
+    /**
+     * 提交新的广告信息
+     */
+    $("#submit").click(function () {
+        var ADInfo = {};
+        var ADTitle = $("#ad_title").val().trim();
+        var SelectCrowd = $("#peopleSelect").find("option:selected").text().trim();
+        var SelectGender = $("#sexSelect").find("option:selected").text().trim();
+        var pictureName = $("table.ssi-imgToUploadTable tbody tr td").last().text().trim();
+        //获取AD类别
+        //---------------------------–-----–--–-–--–-–----------
+        var ADClasses = {};
+        var ADClassesList = $("#ClassesOption").find("input");
+        var ADClassesSelected = [];
+        ADClassesList.each(function () {
+            if ($(this).is(":checked")) {
+                ADClassesSelected.push(this.value);
+            }
+        });
+        ADClasses["ADClassesSelected"] = ADClassesSelected;
+        //---------------------------–-----–--–-–--–-–----------
+        var ADDescribe = $("#comment").val().trim();
+        var RTBPrice = $("#rtbPrice").val().trim();
+        //格式化请求数据
+        ADInfo["ADTitle"] = ADTitle;
+        ADInfo["SelectCrowd"] = SelectCrowd;
+        ADInfo["SelectGender"] = SelectGender;
+        ADInfo["pictureName"] = pictureName;
+        ADInfo["ADClasses"] = "" + ADClasses;
+        ADInfo["ADDescribe"] = ADDescribe;
+        ADInfo["RTBPrice"] = RTBPrice;
+        console.log(ADInfo);
+        addADInfo(ADInfo);
+    });
 });
 
+/**
+ * 添加新的广告信息
+ * @param ADInfo
+ */
+function addADInfo(ADInfo) {
+    $.ajax({
+        method: "post",
+        url: "/dsp/addADInfo",
+        contentType: "application/json",
+        data: JSON.stringify(ADInfo),
+        success: function (e) {
+            if (e.code == 200) {
+                alert(e.message);
+            } else {
+                alert(e.message);
+            }
+        },
+        error: function () {
+            alert("Error!");
+        }
+    });
+
+
+}
+
+/**
+ * 初始化广告列表
+ */
 function initADList() {
-    $.getJSON("/dsp/getAllADInformation", function (data) {
+    $.getJSON("/dsp/InitADInformation", function (data) {
         var tbody = $("#ad_list");
         for (var i in data) {
-            // console.log(data[i]);
             tbody.append(
                 '<tr>' +
                 '<td align="center">' + data[i]["adid"] + '</td>' +
@@ -99,6 +154,18 @@ function initADList() {
                 '</div>' +
                 '</td>' +
                 '</tr>'
+            );
+        }
+    });
+    $.getJSON("/profession/initprofession", function (data) {
+        var ClassesOption = $("#ClassesOption");
+        for (var i in data) {
+            ClassesOption.append(
+                '<div class="form-check form-check-inline">' +
+                '<label class="form-check-label">' +
+                '<input type="checkbox" class="form-check-input" value="' + data[i].professionId + '"/>' + data[i].professionName +
+                '</label>' +
+                '</div>'
             );
         }
     });

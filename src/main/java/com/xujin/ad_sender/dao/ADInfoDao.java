@@ -12,9 +12,10 @@ import java.util.List;
 @Mapper
 public interface ADInfoDao {
     @Select("select * from ad_information")
-    List<ADInfoEntity> getAllADInformation();
-    @Insert("insert into ad_information(ADTitle,SelectCrowd,SelectGender,UploadPicture,ADClasses,ADDescribe,PTBPrice)" + " " +
-            "values(#{ADTitle},#{SelectCrowd},#{SelectGender},#{UploadPicture},#{ADClasses},#{ADDescribe},#{PTBPrice})")
+    List<ADInfoEntity> InitADInformation();
+
+    @Insert("insert into ad_information(ADTitle,SelectCrowd,SelectGender,UploadPicture,ADClasses,ADDescribe,RTBPrice)" + " " +
+            "values(#{ADTitle},#{SelectCrowd},#{SelectGender},#{UploadPicture},#{ADClasses},#{ADDescribe},#{RTBPrice})")
     void addADInfo(ADInfoEntity adInfoEntity);
 
 }

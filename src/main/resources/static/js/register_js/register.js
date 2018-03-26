@@ -1,7 +1,11 @@
 $(function () {
+    init();
     $("#register").click(function () {
         var UserName = $("#UserName").val().trim();
         var PassWord = $("#pwd").val().trim();
+        //获取选中的文本
+        // var Profession = $("#Profession").find("option:selected").text().trim();
+        // 获取选中的value
         var Profession = $("#Profession").val().trim();
         var Sex = $("#Sex").val().trim();
         var Age = $("#Age").val().trim();
@@ -17,11 +21,9 @@ $(function () {
                 HobbySelected.push(this.value);
             }
         });
+        HobbyJson["HobbySelected"] = HobbySelected;
         //————————————————————————————————————————————————————
         //进行ajax请求
-        console.log(HobbySelected);
-        console.log(PassWord);
-        HobbyJson["HobbySelected"] = HobbySelected;
         Register(UserName, PassWord, Profession, Sex, Age, HobbyJson);
     });
 
@@ -76,10 +78,10 @@ function init() {
  * 初始化职业选择项
  */
 function initSelectProfession() {
-    $.getJSON("/getAllProfession", function (data) {
-        var ProfessionList = $("#ProfessionList");
+    $.getJSON("/profession/initprofession", function (data) {
+        var ProfessionList = $("#Profession");
         for (var i in data) {
-            ProfessionList.options.add(new Option(i.ProfessionName, i.ProfessionID));
+            ProfessionList.append(new Option(data[i].professionName, data[i].professionId));
         }
     });
 }
@@ -88,13 +90,13 @@ function initSelectProfession() {
  * 初始化爱好选择项
  */
 function initSelectHobby() {
-    $.getJSON("/getAllHobby", function (data) {
+    $.getJSON("/hobby/inithobby", function (data) {
         var HobbyOption = $("#HobbyOption");
         for (var i in data) {
             HobbyOption.append(
                 '<div class="form-check form-check-inline">' +
                 '<label class="form-check-label">' +
-                '<input type="checkbox" class="form-check-input" value="' + i.HobbyID + '"/>' + i.HobbyName +
+                '<input type="checkbox" class="form-check-input" value="' + data[i].hobbyID + '"/>' + data[i].hobbyName +
                 '</label>' +
                 '</div>'
             );

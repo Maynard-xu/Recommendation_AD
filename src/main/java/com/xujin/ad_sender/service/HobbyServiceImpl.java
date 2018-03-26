@@ -13,6 +13,11 @@ public class HobbyServiceImpl implements HobbyService {
     @Autowired
     HobbyDao hobbyDao;
 
+    /**
+     * InitHobby Service
+     *
+     * @return
+     */
     @Override
     public List<HobbyEntity> InitHobby() {
         return hobbyDao.InitHobby();

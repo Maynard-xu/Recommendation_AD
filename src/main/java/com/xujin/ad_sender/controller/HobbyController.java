@@ -17,12 +17,11 @@ public class HobbyController {
 
     /**
      * 初始化hobby框
+     *
      * @return
      */
     @GetMapping("/inithobby")
-    public List<HobbyEntity> inithobby(){
+    public List<HobbyEntity> inithobby() {
         return hobbyService.InitHobby();
     }
-
-
 }

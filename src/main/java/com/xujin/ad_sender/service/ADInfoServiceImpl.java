@@ -21,8 +21,8 @@ public class ADInfoServiceImpl implements ADInfoService {
     ADInfoDao adInfoDao;
 
     @Override
-    public List<ADInfoEntity> getAllADInformation() {
-        return adInfoDao.getAllADInformation();
+    public List<ADInfoEntity> InitADInformation() {
+        return adInfoDao.InitADInformation();
     }
 
     @Override

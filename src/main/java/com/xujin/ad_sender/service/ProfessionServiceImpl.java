@@ -10,14 +10,15 @@ import java.util.List;
 
 @Service
 public class ProfessionServiceImpl implements ProfessionService {
+
     @Autowired
     ProfessionDao professionDao;
 
     /**
+     * InitProfession Service
      *
      * @return
      */
-
     @Override
     public List<ProfessionEntity> InitProfession() {
         return professionDao.InitProfession();

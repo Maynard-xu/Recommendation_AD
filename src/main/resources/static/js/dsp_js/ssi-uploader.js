@@ -614,19 +614,19 @@
             });
             //--------------end of ajax request-----------------------
 
-            i = ii;
-            i++;//go to the next element
-            while (thisS.toUpload[i] === null) {// do it until you find a file
-                i++;
-            }
-            if (i < thisS.toUpload.length) {// if more files exist start the next request
-                formData = new FormData();
-                $.each(thisS.options.data, function (key, value) {
-                    formData.append(key, value);
-                });
-                formData.append('files[]', thisS.toUpload[i]);
-                ajaxLoopRequest(formData, i);
-            }
+            // i = ii;
+            // i++;//go to the next element
+            // while (thisS.toUpload[i] === null) {// do it until you find a file
+            //     i++;
+            // }
+            // if (i < thisS.toUpload.length) {// if more files exist start the next request
+            //     formData = new FormData();
+            //     $.each(thisS.options.data, function (key, value) {
+            //         formData.append(key, value);
+            //     });
+            //     formData.append('files[]', thisS.toUpload[i]);
+            //     ajaxLoopRequest(formData, i);
+            // }
         }
     };
     var setElementMessage = function (thisS, index, msgType, msg, title) {
@@ -783,7 +783,6 @@
             } else {
                 console.log('The targeted element is not file input.')
             }
-
         });
     };
     //functions

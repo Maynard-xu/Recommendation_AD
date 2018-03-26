@@ -1,14 +1,12 @@
 package com.xujin.ad_sender.controller;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.gson.Gson;
 import com.xujin.ad_sender.entity.ADInfoEntity;
 import com.xujin.ad_sender.service.ADInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.UUIDEditor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +29,9 @@ public class DspIndexController {
     @Autowired
     ADInfoService adInfoService;
 
-    @GetMapping("/getAllADInformation")
-    public List<ADInfoEntity> getAllADInformation() {
-        return adInfoService.getAllADInformation();
+    @GetMapping("/InitADInformation")
+    public List<ADInfoEntity> InitADInformation() {
+        return adInfoService.InitADInformation();
     }
 
     @PostMapping("/upload")
@@ -51,6 +49,20 @@ public class DspIndexController {
             e.printStackTrace();
             map.put("state", 0);
         }
+        return map;
+    }
+
+    //    广告路径 images/upload_images/
+    @PostMapping("/addADInfo")
+    public Map<String, Object> addADInfo(@RequestBody String adInfo) {
+        String url = "images/upload_images/";
+        ADInfoEntity adInfoEntity = new Gson().fromJson(adInfo, ADInfoEntity.class);
+        Map<String, Object> map = new HashMap<>();
+        adInfoEntity.setUploadPicture(url + adInfoEntity.getUploadPicture());
+        adInfoService.addADInfo(adInfoEntity);
+        map.put("success", true);
+        map.put("message", "ADD successful");
+        map.put("code", "200");
         return map;
     }
 }

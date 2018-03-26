@@ -5,6 +5,8 @@ import com.xujin.ad_sender.entity.ADInfoEntity;
 import java.util.List;
 
 public interface ADInfoService {
-    List<ADInfoEntity> getAllADInformation();
+    List<ADInfoEntity> InitADInformation();
+
     void addADInfo(ADInfoEntity adInfoEntity);
+
 }
