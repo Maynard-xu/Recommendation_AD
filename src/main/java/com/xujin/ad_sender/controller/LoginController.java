@@ -1,5 +1,6 @@
 package com.xujin.ad_sender.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.xujin.ad_sender.entity.UserEntity;
 import com.xujin.ad_sender.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,6 @@ public class LoginController {
     public String login() {
         return "ad_login";
     }
-
     /**
      * 跳转注册页面
      *
@@ -70,7 +70,6 @@ public class LoginController {
     public String ad_dsp_index() {
         return "ad_dsp_index";
     }
-
 
     /**
      * login结果

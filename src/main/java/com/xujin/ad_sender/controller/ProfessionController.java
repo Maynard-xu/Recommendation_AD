@@ -16,7 +16,7 @@ public class ProfessionController {
     ProfessionService professionService;
 
     /**
-     * 初始化profession框
+     * 初始化profession框。
      * @return
      */
     @GetMapping("/initprofession")

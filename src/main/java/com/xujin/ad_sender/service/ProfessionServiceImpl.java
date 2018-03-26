@@ -13,6 +13,10 @@ public class ProfessionServiceImpl implements ProfessionService {
     @Autowired
     ProfessionDao professionDao;
 
+    /**
+     *
+     * @return
+     */
 
     @Override
     public List<ProfessionEntity> InitProfession() {
