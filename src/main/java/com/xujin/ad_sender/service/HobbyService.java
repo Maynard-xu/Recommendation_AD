@@ -6,7 +6,7 @@ import com.xujin.ad_sender.entity.UserEntity;
 import java.util.List;
 
 public interface HobbyService {
-    List<HobbyEntity> SearchHobby();
+    List<HobbyEntity> InitHobby();
 
 }
 

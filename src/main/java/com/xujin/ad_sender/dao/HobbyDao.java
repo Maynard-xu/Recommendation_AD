@@ -12,5 +12,5 @@ import java.util.List;
 @Mapper
 public interface HobbyDao {
     @Select("SELECT  * from hobby")
-    List<HobbyEntity> SearchHobby();
+    List<HobbyEntity> InitHobby();
 }

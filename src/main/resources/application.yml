@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/Recommendation_AD?useSSL=true
+    url: jdbc:mysql://127.0.0.1:3306/recommendation_ad?useSSL=true
     username: root
-    password: mysqlxujin
+    password: 123456
 logging:
   level: debug
 #?useUnicode=true&characterEncoding=utf-8

@@ -14,7 +14,7 @@ public class HobbyServiceImpl implements HobbyService {
     HobbyDao hobbyDao;
 
     @Override
-    public List<HobbyEntity> SearchHobby() {
-        return hobbyDao.SearchHobby();
+    public List<HobbyEntity> InitHobby() {
+        return hobbyDao.InitHobby();
     }
 }
