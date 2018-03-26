@@ -22,4 +22,10 @@ public class ProfessionServiceImpl implements ProfessionService {
     public List<ProfessionEntity> InitProfession() {
         return professionDao.InitProfession();
     }
+
+    @Override
+    public String selectProfessionNameByProfessionId(int professionid) {
+        return professionDao.selectProfessionNameByProfessionId(professionid) ;
+    }
+
 }

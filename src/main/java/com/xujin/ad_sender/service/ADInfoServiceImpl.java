@@ -24,4 +24,9 @@ public class ADInfoServiceImpl implements ADInfoService {
     public List<ADInfoEntity> getAllADInformation() {
         return adInfoDao.getAllADInformation();
     }
+
+    @Override
+    public void addADInfo(ADInfoEntity adInfoEntity) {
+        adInfoDao.addADInfo(adInfoEntity);
+    }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ADInfoService {
     List<ADInfoEntity> getAllADInformation();
+    void addADInfo(ADInfoEntity adInfoEntity);
 }

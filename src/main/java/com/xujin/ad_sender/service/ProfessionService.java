@@ -6,5 +6,7 @@ import java.util.List;
 //
 public interface ProfessionService {
     List<ProfessionEntity> InitProfession();
+    String selectProfessionNameByProfessionId(int professionid);
 
 }
+

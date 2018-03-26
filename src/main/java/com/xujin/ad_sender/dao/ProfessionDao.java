@@ -12,4 +12,8 @@ import java.util.List;
 public interface ProfessionDao {
     @Select("SELECT * from profession")
     List<ProfessionEntity> InitProfession();
+
+    @Select(" ProfessionName from profession where ProfessionId=#{professionid}")
+    String selectProfessionNameByProfessionId(int professionid);
+
 }
