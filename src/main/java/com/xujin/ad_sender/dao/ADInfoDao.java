@@ -20,6 +20,6 @@ public interface ADInfoDao {
     void updateADInfo(ADInfoEntity adInfoEntity);
 
     @Delete("delete from ad_information where ADID=#{ADID}")
-    void deleteADInfo(ADInfoEntity adInfoEntity);
+    void deleteADInfo(Integer ADID);
 
 }

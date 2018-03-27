@@ -36,8 +36,8 @@ public class ADInfoServiceImpl implements ADInfoService {
     }
 
     @Override
-    public void deleteADInfo(ADInfoEntity adInfoEntity) {
-        adInfoDao.deleteADInfo(adInfoEntity);
+    public void deleteADInfo(Integer ADID) {
+        adInfoDao.deleteADInfo(ADID);
     }
 
 

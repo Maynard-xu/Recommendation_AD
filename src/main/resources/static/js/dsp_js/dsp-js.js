@@ -12,36 +12,7 @@ $(function () {
      * 提交新的广告信息
      */
     $("#submit").click(function () {
-        var ADInfo = {};
-        var ADTitle = $("#ad_title").val().trim();
-        var SelectCrowd = $("#peopleSelect").find("option:selected").text().trim();
-        var SelectGender = $("#sexSelect").find("option:selected").text().trim();
-        var pictureName = $("table.ssi-imgToUploadTable tbody tr td").last().text().trim();
-        //获取AD类别
-        //---------------------------–-----–--–-–--–-–----------
-        var ADClasses = {};
-        var ADClassesList = $("#ClassesOption").find("input");
-        var ADClassesSelected = [];
-        ADClassesList.each(function () {
-            if ($(this).is(":checked")) {
-                ADClassesSelected.push(this.value);
-            }
-        });
-        ADClasses["ADClassesSelected"] = ADClassesSelected;
-        //---------------------------–-----–--–-–--–-–----------
-        var ADDescribe = $("#comment").val().trim();
-        var RTBPrice = $("#rtbPrice").val().trim();
-        //格式化请求数据
-        ADInfo["ADID"] = null;
-        ADInfo["ADTitle"] = ADTitle;
-        ADInfo["SelectCrowd"] = SelectCrowd;
-        ADInfo["SelectGender"] = SelectGender;
-        ADInfo["UploadPicture"] = pictureName;
-        ADInfo["ADClasses"] = JSON.stringify(ADClasses);
-        ADInfo["ADDescribe"] = ADDescribe;
-        ADInfo["RTBPrice"] = RTBPrice;
-        console.log(ADInfo);
-        addADInfo(ADInfo);
+        addADInfo();
     });
 });
 
@@ -49,7 +20,36 @@ $(function () {
  * 添加新的广告信息
  * @param ADInfo
  */
-function addADInfo(ADInfo) {
+function addADInfo() {
+    var ADInfo = {};
+    var ADTitle = $("#ad_title").val().trim();
+    var SelectCrowd = $("#peopleSelect").find("option:selected").text().trim();
+    var SelectGender = $("#sexSelect").find("option:selected").text().trim();
+    var pictureName = $("table.ssi-imgToUploadTable tbody tr td").last().text().trim();
+    //获取AD类别
+    //---------------------------–-----–--–-–--–-–----------
+    var ADClasses = {};
+    var ADClassesList = $("#ClassesOption").find("input");
+    var ADClassesSelected = [];
+    ADClassesList.each(function () {
+        if ($(this).is(":checked")) {
+            ADClassesSelected.push(this.value);
+        }
+    });
+    ADClasses["ADClassesSelected"] = ADClassesSelected;
+    //---------------------------–-----–--–-–--–-–----------
+    var ADDescribe = $("#comment").val().trim();
+    var RTBPrice = $("#rtbPrice").val().trim();
+    //格式化请求数据
+    ADInfo["ADID"] = null;
+    ADInfo["ADTitle"] = ADTitle;
+    ADInfo["SelectCrowd"] = SelectCrowd;
+    ADInfo["SelectGender"] = SelectGender;
+    ADInfo["UploadPicture"] = pictureName;
+    ADInfo["ADClasses"] = JSON.stringify(ADClasses);
+    ADInfo["ADDescribe"] = ADDescribe;
+    ADInfo["RTBPrice"] = RTBPrice;
+    // console.log(ADInfo);
     $.ajax({
         method: "post",
         url: "/dsp/addADInfo",
@@ -102,44 +102,27 @@ function initADList() {
                 '<div class="register_form">' +
                 '<div class="form-group">' +
                 '<label class="control-label">AD Title</label>' +
-                '<input required="required" type="text" class="form-control"' +
+                '<input id="ad_title_' + data[i]["adid"] + '" required="required" type="text" class="form-control"' +
                 'placeholder="' + data[i]["adtitle"] + '"/>' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label class="control-label">AD Classes</label>' +
-                '<div id="editHobbyOption">' +
-                '<div class="form-check form-check-inline">' +
-                '<label class="form-check-label">' +
-                '<input type="checkbox" class="form-check-input"\n' +
-                'value="1"/>IT' +
-                '</label>' +
-                '</div>' +
-                '<div class="form-check form-check-inline">' +
-                '<label class="form-check-label">' +
-                '<input type="checkbox" class="form-check-input"\n' +
-                'value="2"/>IOT' +
-                '</label>' +
-                '</div>' +
-                '<div class="form-check disabled form-check-inline">' +
-                '<label class="form-check-label">' +
-                '<input type="checkbox" class="form-check-input"\n' +
-                'value="3"/>Children' +
-                '</label>' +
-                '</div>' +
+                '<div id="editClassesOption_' + data[i]["adid"] + '">' +
+                //wait init
                 '</div>' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label class="control-label">AD Describe</label>' +
-                '<textarea type="text" class="form-control" rows="5">' + data[i]["addescribe"] + '</textarea>' +
+                '<textarea id="comment_' + data[i]["adid"] + '" type="text" class="form-control" rows="5">' + data[i]["addescribe"] + '</textarea>' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label class="control-label">RTB Price</label>' +
-                '<input class="form-control input-lg" type="text" name="cat_add"' +
+                '<input id="rtbPrice_' + data[i]["adid"] + '" class="form-control input-lg" type="text" name="cat_add"' +
                 'value=""' +
                 'placeholder="' + data[i]["rtbprice"] + '"/>' +
                 '</div>' +
                 '<input type="submit" value="complete"' +
-                'class="float-right bg-success text-white" id="complete"/>' +
+                'class="float-right bg-success text-white" id="' + data[i]["adid"] + '" onclick="updateADInfo(this)"/>' +
                 '<!--<button type="button" class="btn btn-primary" id="register">Register</button>-->' +
                 '</div>' +
                 '</div>' +
@@ -152,23 +135,114 @@ function initADList() {
                 '</div>' +
                 '</div>' +
                 '</div>' +
-                '<button type="button" class="btn btn-sm btn-danger">删除</button>' +
+                '<button type="button" class="btn btn-sm btn-danger"  onclick="deleteADInfo(this)">删除</button>' +
                 '</div>' +
                 '</td>' +
                 '</tr>'
             );
+            editClassesOption("#editClassesOption_" + i);
+
         }
     });
     $.getJSON("/profession/initprofession", function (data) {
         var ClassesOption = $("#ClassesOption");
         for (var i in data) {
-            ClassesOption.append(
+            var content =
                 '<div class="form-check form-check-inline">' +
                 '<label class="form-check-label">' +
                 '<input type="checkbox" class="form-check-input" value="' + data[i].professionId + '"/>' + data[i].professionName +
                 '</label>' +
-                '</div>'
-            );
+                '</div>';
+            ClassesOption.append(content);
+        }
+    });
+}
+
+/**
+ * 初始化编辑的profession选择框
+ * @param editnum
+ */
+function editClassesOption(editnum) {
+    var ClassesOption = $(editnum);
+    $.getJSON("/profession/initprofession", function (data) {
+        for (var i in data) {
+            var content =
+                '<div class="form-check form-check-inline">' +
+                '<label class="form-check-label">' +
+                '<input type="checkbox" class="form-check-input" value="' + data[i].professionId + '"/>' + data[i].professionName +
+                '</label>' +
+                '</div>';
+            ClassesOption.append(content);
+        }
+    });
+}
+
+function updateADInfo(obj) {
+    //$(obj).prop('tagName')打印当前标签name
+    var i = $(obj).attr("id");
+    var ADInfo = {};
+    var ADTitle = $("#ad_title_" + i).val().trim();
+    //获取AD类别
+    //---------------------------–-----–--–-–--–-–----------
+    var ADClasses = {};
+    var ADClassesList = $("#editClassesOption_" + i).find("input");
+    var ADClassesSelected = [];
+    ADClassesList.each(function () {
+        if ($(this).is(":checked")) {
+            ADClassesSelected.push(this.value);
+        }
+    });
+    ADClasses["ADClassesSelected"] = ADClassesSelected;
+    //---------------------------–-----–--–-–--–-–----------
+    var ADDescribe = $("#comment_" + i).val().trim();
+    var RTBPrice = $("#rtbPrice_" + i).val().trim();
+    //格式化请求数据
+    ADInfo["ADID"] = i;
+    ADInfo["ADTitle"] = ADTitle;
+    ADInfo["SelectCrowd"] = null;
+    ADInfo["SelectGender"] = null;
+    ADInfo["UploadPicture"] = null;
+    ADInfo["ADClasses"] = JSON.stringify(ADClasses);
+    ADInfo["ADDescribe"] = ADDescribe;
+    ADInfo["RTBPrice"] = RTBPrice;
+    $.ajax({
+        method: "post",
+        url: "/dsp/updateADInfo",
+        contentType: "application/json",
+        data: JSON.stringify(ADInfo),
+        success: function (e) {
+            if (e.code == 200) {
+                alert(e.message);
+                window.location.reload(true);
+            } else {
+                alert(e.message);
+            }
+        },
+        error: function () {
+            alert("Error!");
+        }
+    });
+}
+
+function deleteADInfo(obj) {
+    var ADID = $(obj).parent().parent().siblings().first().text();
+    $(obj).parent().parent().parent().remove();
+    $.ajax({
+        method: "post",
+        url: "/dsp/deleteADInfo",
+        data: {
+            "ADID": ADID
+        },
+        success: function (e) {
+            if (e.code == 200) {
+                alert(e.message);
+                window.location.reload(true);
+            } else {
+                alert(e.message);
+            }
+        },
+        error: function () {
+            alert("Error!");
         }
     });
 }

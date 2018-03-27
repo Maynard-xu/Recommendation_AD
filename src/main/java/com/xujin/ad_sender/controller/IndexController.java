@@ -58,5 +58,10 @@ public class IndexController {
         }
         return search_list;
     }
+
+    @GetMapping("/getADimg")
+    public String getADimg() {
+        return "images/background/back.jpg";
+    }
 }
 

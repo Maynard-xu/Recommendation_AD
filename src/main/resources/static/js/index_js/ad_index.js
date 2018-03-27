@@ -36,3 +36,14 @@ function click_span(obj) {
     console.log(link);
     $('#view_box').attr("src", link);
 }
+
+function recommend_AD() {
+    $.getJSON("/index/getADimg", function (data) {
+        $("#ad_img").attr("src", data);
+    });
+
+}
+
+$(function () {
+    recommend_AD();
+});

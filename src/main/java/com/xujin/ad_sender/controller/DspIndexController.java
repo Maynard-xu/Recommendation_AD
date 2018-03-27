@@ -34,6 +34,13 @@ public class DspIndexController {
         return adInfoService.InitADInformation();
     }
 
+    /**
+     * 提交图片
+     *
+     * @param file
+     * @param request
+     * @return
+     */
     @PostMapping("/upload")
     public Map<String, Object> upload(MultipartFile file, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
@@ -53,6 +60,13 @@ public class DspIndexController {
     }
 
     //    广告路径 images/upload_images/
+
+    /**
+     * 添加广告
+     *
+     * @param adInfo
+     * @return
+     */
     @PostMapping("/addADInfo")
     public Map<String, Object> addADInfo(@RequestBody String adInfo) {
         String url = "images/upload_images/";
@@ -64,6 +78,38 @@ public class DspIndexController {
         adInfoService.addADInfo(adInfoEntity);
         map.put("success", true);
         map.put("message", "ADD successful");
+        map.put("code", "200");
+        return map;
+    }
+
+    /**
+     * 更新广告信息
+     *
+     * @param adInfo
+     */
+    @PostMapping("/updateADInfo")
+    public Map<String, Object> updateADInfo(@RequestBody String adInfo) {
+        Map<String, Object> map = new HashMap<>();
+        ADInfoEntity updateAdInfo = new Gson().fromJson(adInfo, ADInfoEntity.class);
+        System.out.println(updateAdInfo.toString());
+        adInfoService.updateADInfo(updateAdInfo);
+        map.put("success", true);
+        map.put("message", "Update successful");
+        map.put("code", "200");
+        return map;
+    }
+
+    /**
+     * 删除广告信息
+     *
+     * @param ADID
+     */
+    @PostMapping("/deleteADInfo")
+    public Map<String, Object> deleteADInfo(String ADID) {
+        Map<String, Object> map = new HashMap<>();
+        adInfoService.deleteADInfo(Integer.valueOf(ADID));
+        map.put("success", true);
+        map.put("message", "Delete successful");
         map.put("code", "200");
         return map;
     }

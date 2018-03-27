@@ -88,7 +88,8 @@ public class ADInfoEntity {
     @Override
     public String toString() {
         return "ADInfoEntity{" +
-                "ADTitle='" + ADTitle + '\'' +
+                "ADID=" + ADID +
+                ", ADTitle='" + ADTitle + '\'' +
                 ", SelectCrowd='" + SelectCrowd + '\'' +
                 ", SelectGender='" + SelectGender + '\'' +
                 ", UploadPicture='" + UploadPicture + '\'' +
