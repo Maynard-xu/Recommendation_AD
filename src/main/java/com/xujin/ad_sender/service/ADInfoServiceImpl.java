@@ -35,5 +35,10 @@ public class ADInfoServiceImpl implements ADInfoService {
         adInfoDao.updateADInfo(adInfoEntity);
     }
 
+    @Override
+    public void deleteADInfo(ADInfoEntity adInfoEntity) {
+        adInfoDao.deleteADInfo(adInfoEntity);
+    }
+
 
 }

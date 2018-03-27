@@ -1,10 +1,7 @@
 package com.xujin.ad_sender.dao;
 
 import com.xujin.ad_sender.entity.ADInfoEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,5 +18,8 @@ public interface ADInfoDao {
 
     @Update("update ad_information set ADTitle=#{ADTitle},ADClasses=#{ADClasses},ADDescribe=#{ADDescribe},RTBPrice=#{RTBPrice} where ADID=#{ADID}")
     void updateADInfo(ADInfoEntity adInfoEntity);
+
+    @Delete("delete from ad_information where ADID=#{ADID}")
+    void deleteADInfo(ADInfoEntity adInfoEntity);
 
 }

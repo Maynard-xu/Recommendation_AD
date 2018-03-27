@@ -9,4 +9,5 @@ public interface ADInfoService {
 
     void addADInfo(ADInfoEntity adInfoEntity);
     void updateADInfo(ADInfoEntity adInfoEntity);
+    void deleteADInfo(ADInfoEntity adInfoEntity);
 }
