@@ -8,5 +8,5 @@ public interface ADInfoService {
     List<ADInfoEntity> InitADInformation();
 
     void addADInfo(ADInfoEntity adInfoEntity);
-
+    void updateADInfo(ADInfoEntity adInfoEntity);
 }

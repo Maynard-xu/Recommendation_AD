@@ -4,6 +4,7 @@ import com.xujin.ad_sender.entity.ADInfoEntity;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +18,8 @@ public interface ADInfoDao {
     @Insert("insert into ad_information(ADTitle,SelectCrowd,SelectGender,UploadPicture,ADClasses,ADDescribe,RTBPrice)" + " " +
             "values(#{ADTitle},#{SelectCrowd},#{SelectGender},#{UploadPicture},#{ADClasses},#{ADDescribe},#{RTBPrice})")
     void addADInfo(ADInfoEntity adInfoEntity);
+
+    @Update("update ad_information set ADTitle=#{ADTitle},ADClasses=#{ADClasses},ADDescribe=#{ADDescribe},RTBPrice=#{RTBPrice} where ADID=#{ADID}")
+    void updateADInfo(ADInfoEntity adInfoEntity);
 
 }

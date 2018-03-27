@@ -29,4 +29,11 @@ public class ADInfoServiceImpl implements ADInfoService {
     public void addADInfo(ADInfoEntity adInfoEntity) {
         adInfoDao.addADInfo(adInfoEntity);
     }
+
+    @Override
+    public void updateADInfo(ADInfoEntity adInfoEntity) {
+        adInfoDao.updateADInfo(adInfoEntity);
+    }
+
+
 }
