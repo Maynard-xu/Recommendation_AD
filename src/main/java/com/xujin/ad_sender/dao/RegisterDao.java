@@ -16,3 +16,4 @@ public interface RegisterDao {
     @Select("select from register where UserName=#[UserName]")
     RegisterEntity getUserByUserName(String UserName);
 }
+//
