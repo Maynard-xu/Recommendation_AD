@@ -18,7 +18,7 @@ $(function () {
         HobbySelected.push(Hobby);
         HobbyOptionList.each(function () {
             if ($(this).is(":checked")) {
-                HobbySelected.push(this.value);
+                HobbySelected.push(this.nextSibling.nodeValue);
             }
         });
         HobbyJson["HobbySelected"] = HobbySelected;

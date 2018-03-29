@@ -12,7 +12,7 @@ public class RegisterEntity {
     private Integer UserID;
     private String UserName;
     private String PassWord;
-    private String Profession;
+    private Integer Profession;
     private String Sex;
     private Integer Age;
     private String Hobby;
@@ -41,11 +41,11 @@ public class RegisterEntity {
         PassWord = passWord;
     }
 
-    public String getProfession() {
+    public Integer getProfession() {
         return Profession;
     }
 
-    public void setProfession(String profession) {
+    public void setProfession(Integer profession) {
         Profession = profession;
     }
 
