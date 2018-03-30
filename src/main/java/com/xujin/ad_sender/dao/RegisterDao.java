@@ -13,7 +13,6 @@ public interface RegisterDao {
     @Insert("INSERT INTO register (UserName, PassWord, Profession, Sex, Age, Hobby) " +
             "VALUES (#{UserName},#{PassWord},#{Profession},#{Sex},#{Age},#{Hobby})")
     void register(RegisterEntity registerEntity);
-    @Select("select from register where UserName=#[UserName]")
+    @Select("select * from register where UserName=#{UserName}")
     RegisterEntity getUserByUserName(String UserName);
 }
-//

@@ -44,7 +44,7 @@ public class DspIndexController {
     @PostMapping("/upload")
     public Map<String, Object> upload(MultipartFile file, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
-        String path = "F:\\IDEA\\IDEA_Project\\Recommendation_AD\\src\\main\\resources\\static\\upload_images\\s";
+        String path = "/Users/xujin/Desktop/毕业设计/implement_code/ad_sender/src/main/resources/static/upload_images/";
         String fileName = file.getOriginalFilename();
         try {
             new FileWriter(path + fileName);

@@ -22,4 +22,7 @@ public interface ADInfoDao {
     @Delete("delete from ad_information where ADID=#{ADID}")
     void deleteADInfo(Integer ADID);
 
+    @Select("SELECT * from ad_information WHERE SelectGender=#{Sex}")
+    List<ADInfoEntity> RecommendADList(String Sex);
+
 }

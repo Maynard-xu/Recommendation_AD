@@ -8,6 +8,10 @@ public interface ADInfoService {
     List<ADInfoEntity> InitADInformation();
 
     void addADInfo(ADInfoEntity adInfoEntity);
+
     void updateADInfo(ADInfoEntity adInfoEntity);
+
     void deleteADInfo(Integer ADID);
+
+    ADInfoEntity recommendAD(String UserName);
 }

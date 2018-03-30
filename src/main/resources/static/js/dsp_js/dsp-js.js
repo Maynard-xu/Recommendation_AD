@@ -33,7 +33,7 @@ function addADInfo() {
     var ADClassesSelected = [];
     ADClassesList.each(function () {
         if ($(this).is(":checked")) {
-            ADClassesSelected.push(this.value);
+            ADClassesSelected.push(this.nextSibling.nodeValue);
         }
     });
     ADClasses["ADClassesSelected"] = ADClassesSelected;

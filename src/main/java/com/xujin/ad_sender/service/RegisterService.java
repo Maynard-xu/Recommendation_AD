@@ -12,7 +12,7 @@ public interface RegisterService {
      * @param registerEntity
      */
     void register(RegisterEntity registerEntity);
-    Map<String,Object> getUserFeatures(String UserName);
+
+    Map<String, Object> getUserFeatures(String UserName);
 
 }
-//

@@ -1,5 +1,6 @@
 package com.xujin.ad_sender.entity;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -98,4 +99,6 @@ public class ADInfoEntity {
                 ", RTBPrice=" + RTBPrice +
                 '}';
     }
+
+
 }

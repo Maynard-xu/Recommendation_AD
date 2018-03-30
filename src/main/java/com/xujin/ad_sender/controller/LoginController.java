@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,10 +38,11 @@ public class LoginController {
      *
      * @return
      */
-    @GetMapping("/login")
+    @GetMapping({"/login", "/"})
     public String login() {
         return "ad_login";
     }
+
     /**
      * 跳转注册页面
      *
@@ -80,13 +82,14 @@ public class LoginController {
      */
     @ResponseBody
     @PostMapping("/login")
-    public Map<String, Object> login(String userName, String password) {
+    public Map<String, Object> login(String userName, String password, HttpSession session) {
         System.out.println(userName + password);
         Map<String, Object> map = new HashMap<>();
         UserEntity user = userService.searchUserByName(userName);
         System.out.println(user.getUserName() + user.getPassWord());
         if (user != null) {
             if (password.equals(user.getPassWord())) {
+                session.setAttribute(WebSecurityConfig.SESSION_KEY, userName);
                 map.put("success", true);
                 map.put("message", "login in successful");
                 map.put("code", "200");

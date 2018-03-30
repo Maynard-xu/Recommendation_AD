@@ -28,9 +28,10 @@ import java.util.Map;
  */
 @Service
 public class RegisterServiceImpl implements RegisterService {
-//
+    //
     @Autowired
     RegisterDao registerDao;
+    @Autowired
     ProfessionDao professionDao;
 
     @Override
@@ -61,8 +62,8 @@ public class RegisterServiceImpl implements RegisterService {
         } else {
             map.put("SelectCrowd", "老年(51~65)");
         }
-        map.put("features",features);
-        map.put("sex",registerEntity.getSex());
+        map.put("features", features);
+        map.put("sex", registerEntity.getSex());
         return map;
     }
 
