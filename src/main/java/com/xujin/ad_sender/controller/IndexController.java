@@ -33,7 +33,7 @@ public class IndexController {
             String[] args = new String[]{"python3.6", "/Users/xujin/Desktop/毕业设计/implement_code/ad_sender/src/main/java/com/xujin/ad_sender/py/searchData.py", keyword, PrePageNum};
             System.out.println("start_search.................");
             Process pr = Runtime.getRuntime().exec(args);
-            InputStreamReader inputStreamReader = new InputStreamReader(pr.getInputStream());
+            InputStreamReader inputStreamReader = new InputStreamReader(pr.getInputStream(), "GBK");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String t;
             StringBuffer str = new StringBuffer();

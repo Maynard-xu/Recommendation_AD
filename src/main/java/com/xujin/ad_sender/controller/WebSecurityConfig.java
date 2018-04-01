@@ -14,7 +14,12 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- * Created by gxurn9 on 11/22/2017.
+ * \* Created with IntelliJ IDEA.
+ * \* Description: 拦截器
+ * \* User: xujin
+ * \* Date: 2018/3/27
+ * \* Time: 18:04
+ * \
  */
 @Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {

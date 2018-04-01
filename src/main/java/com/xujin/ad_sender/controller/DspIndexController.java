@@ -1,11 +1,9 @@
 package com.xujin.ad_sender.controller;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.Gson;
 import com.xujin.ad_sender.entity.ADInfoEntity;
 import com.xujin.ad_sender.service.ADInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.UUIDEditor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
