@@ -1,3 +1,8 @@
+/**
+ * 回车事件调用搜索
+ * @param ev
+ * @constructor
+ */
 function Search(ev) {
     if (ev.keyCode === 13) {
         ev.preventDefault();
@@ -8,7 +13,13 @@ function Search(ev) {
     }
 }
 
+/**
+ * 获取搜索结果
+ * @param keyword
+ */
 function get_search(keyword) {
+    $('#content_list').empty();
+    recommend_AD();
     $.ajax({
         type: 'POST',
         url: '/index/get_search',
@@ -27,23 +38,50 @@ function get_search(keyword) {
     });
 }
 
+/**
+ * 将搜索结果展示成链接形式
+ * @param name
+ * @param link
+ */
 function addLink(name, link) {
     $('#content_list').append('<li><span onclick="click_span(this)" id=' + link + '>' + name + '</span></li>');
 }
 
+/**
+ * 点击搜索结果链接，iframe跳转页面
+ * @param obj
+ */
 function click_span(obj) {
     var link = obj.id;
     console.log(link);
     $('#view_box').attr("src", link);
 }
 
+/**
+ * 获取推荐广告
+ */
 function recommend_AD() {
-    $.getJSON("/index/getADimg", function (data) {
-        $("#ad_img").attr("src", data);
+    console.log('----------------');
+    // $.getJSON("/index/getADimg", function (data) {
+    //     console.log(data);
+    //     $("#ad_img").attr("src", data);
+    // });
+    $.ajax({
+        type: 'GET',
+        url: '/index/getRecommendAD',
+        success: function (data) {
+            // console.log(data['picture']);
+            // console.log(data['describe']);
+            $("#ad_img").attr("src", data['picture']);
+            $("#ad_describe p").text(data['describe']);
+        }
     });
 
 }
 
+/**
+ * 页面加载完成后运行函数
+ */
 $(function () {
     recommend_AD();
 });

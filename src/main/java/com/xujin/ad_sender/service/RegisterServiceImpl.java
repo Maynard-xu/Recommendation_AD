@@ -45,14 +45,17 @@ public class RegisterServiceImpl implements RegisterService {
         List<String> features = new ArrayList<>();
         RegisterEntity registerEntity = registerDao.getUserByUserName(UserName);
         String ProfessionName = professionDao.selectProfessionNameByProfessionId(registerEntity.getProfession());
-        features.add(ProfessionName);
+        features.add("\'" + ProfessionName + "\'");
         JsonParser jsonParser = new JsonParser();
         JsonElement parse = jsonParser.parse(registerEntity.getHobby());
         JsonObject asJsonObject = parse.getAsJsonObject();
         JsonArray hobbySelected = asJsonObject.get("HobbySelected").getAsJsonArray();
         for (JsonElement i : hobbySelected) {
-            features.add(i.getAsString());
+            features.add("\'" + i.getAsString() + "\'");
         }
+//        //
+//        System.out.println(features);
+//        //
         if (registerEntity.getAge() > 13 && registerEntity.getAge() < 18) {
             map.put("SelectCrowd", "青少年(13~18)");
         } else if (registerEntity.getAge() > 18 && registerEntity.getAge() < 30) {

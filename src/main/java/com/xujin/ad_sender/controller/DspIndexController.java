@@ -67,7 +67,7 @@ public class DspIndexController {
      */
     @PostMapping("/addADInfo")
     public Map<String, Object> addADInfo(@RequestBody String adInfo) {
-        String url = "images/upload_images/";
+        String url = "upload_images/";
         ADInfoEntity adInfoEntity = new Gson().fromJson(adInfo, ADInfoEntity.class);
         Map<String, Object> map = new HashMap<>();
         System.out.println(adInfoEntity.getADTitle());

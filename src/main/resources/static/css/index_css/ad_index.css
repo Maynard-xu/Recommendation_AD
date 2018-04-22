@@ -1,27 +1,14 @@
 #main_search {
     border: 1px solid black;
-    margin-top: 10px;
-}
-
-#maintain {
-    border: 2px solid red;
-    border-radius: 10px;
-    width: 100%;
-    height: 800px;
+    border-radius: 5px;
 }
 
 #content {
     position: relative;
     border: 1px solid black;
     border-radius: 10px;
-    height: 90%;
+    height: 450px;
     overflow: scroll;
-}
-
-#main_row {
-    position: relative;
-    margin-top: 10px;
-    height: 32%;
 }
 
 iframe {
@@ -29,10 +16,6 @@ iframe {
     position: relative;
     width: 100%;
     height: 100%;
-}
-
-#link_page {
-    height: 58%;
 }
 
 ul li span {
@@ -55,7 +38,7 @@ ul li span:hover {
 #ad_img_div {
     position: relative;
     overflow: scroll;
-    height: 100%;
+    height: 300px;
     /*float: left;*/
 }
 
@@ -70,11 +53,11 @@ ul li span:hover {
 #ad_describe {
     overflow: scroll;
     border: 1px solid black;
-    border-radius: 10px;;
+    border-radius: 10px;
+    height: 300px;
 }
 
 #ad_describe p {
-    margin-left: -15px;
     /*超长进行换行*/
     word-wrap: break-word;
     /*可以处理空白*/

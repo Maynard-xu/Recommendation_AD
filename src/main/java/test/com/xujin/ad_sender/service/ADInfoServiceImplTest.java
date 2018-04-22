@@ -10,12 +10,12 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.runner.RunWith;
-import org.mockito.internal.runners.JUnit44RunnerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.SocketUtils;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +92,30 @@ public class ADInfoServiceImplTest {
      */
     @Test
     public void testGetsimiliraty() throws Exception {
-//TODO: Test goes here... 
+//TODO: Test goes here...
+        try {
+//            "['计算机软件', '篮球', '电影', '排球']"   "['计算机软件', 'IT服务']"
+            String[] args = new String[]{"python3.6", "../ad_sender/src/main/java/com/xujin/ad_sender/py/SimilarityCalculate.py", "['计算机软件', '篮球', '电影', '排球']", "['计算机软件', 'IT服务']"};
+            System.out.println("start_calculate.................");
+            for (String i : args) {
+                System.out.println(i);
+            }
+            Process pr = Runtime.getRuntime().exec(args);
+            InputStreamReader inputStreamReader = new InputStreamReader(pr.getInputStream());
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String t;
+            StringBuffer str = new StringBuffer();
+            while ((t = bufferedReader.readLine()) != null) {
+                str.append(t);
+            }
+            bufferedReader.close();
+            inputStreamReader.close();
+            pr.waitFor();
+            System.out.println("end_calculate.................");
+            System.out.println(str.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

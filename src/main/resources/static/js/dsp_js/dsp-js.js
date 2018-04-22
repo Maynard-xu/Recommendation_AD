@@ -45,6 +45,7 @@ function addADInfo() {
     ADInfo["ADTitle"] = ADTitle;
     ADInfo["SelectCrowd"] = SelectCrowd;
     ADInfo["SelectGender"] = SelectGender;
+    // console.log("pictureName：" + pictureName);
     ADInfo["UploadPicture"] = pictureName;
     ADInfo["ADClasses"] = JSON.stringify(ADClasses);
     ADInfo["ADDescribe"] = ADDescribe;
@@ -140,7 +141,7 @@ function initADList() {
                 '</td>' +
                 '</tr>'
             );
-            editClassesOption("#editClassesOption_" + i);
+            editClassesOption("#editClassesOption_" + data[i]["adid"]);
 
         }
     });
@@ -177,6 +178,10 @@ function editClassesOption(editnum) {
     });
 }
 
+/**
+ * 更新广告信息
+ * @param obj
+ */
 function updateADInfo(obj) {
     //$(obj).prop('tagName')打印当前标签name
     var i = $(obj).attr("id");
@@ -224,6 +229,10 @@ function updateADInfo(obj) {
     });
 }
 
+/**
+ * 删除广告信息
+ * @param obj
+ */
 function deleteADInfo(obj) {
     var ADID = $(obj).parent().parent().siblings().first().text();
     $(obj).parent().parent().parent().remove();

@@ -4,11 +4,14 @@ import com.google.gson.*;
 import com.xujin.ad_sender.dao.ADInfoDao;
 import com.xujin.ad_sender.entity.ADInfoEntity;
 import com.xujin.ad_sender.entity.RecommendEntity;
+import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.*;
 
 /**
@@ -56,6 +59,8 @@ public class ADInfoServiceImpl implements ADInfoService {
     public ADInfoEntity recommendAD(String UserName) {
         List<RecommendEntity> recommendEntities = new ArrayList<>();
         Map<String, Object> userFeatures = registerService.getUserFeatures(UserName);
+        System.out.println("userFeatures: " + userFeatures);
+        //先跟据性别取出初始化的推荐列表
         List<ADInfoEntity> adList = adInfoDao.RecommendADList(userFeatures.get("sex").toString());
         for (ADInfoEntity adInfoEntity : adList) {
             if (adInfoEntity.getSelectCrowd().equals(userFeatures.get("SelectCrowd"))) {
@@ -69,10 +74,14 @@ public class ADInfoServiceImpl implements ADInfoService {
             JsonElement parse = jsonParser.parse(recommendEntity.getAdInfoEntity().getADClasses());
             JsonObject asJsonObject = parse.getAsJsonObject();
             JsonArray ADClassesSelected = asJsonObject.get("ADClassesSelected").getAsJsonArray();
-//            List<String> ADClasses = new Gson().fromJson(ADClassesSelected.toString(), (Type) String.class);
             //计算相似度 similiraty
-            String similiraty = getsimiliraty((String) userFeatures.get("features"), ADClassesSelected.getAsString());
-            recommendEntity.setSimiler(Integer.valueOf(similiraty));
+            List<String> list = new ArrayList<>();
+            for (JsonElement i : ADClassesSelected) {
+                list.add("\'" + i.getAsString() + "\'");
+            }
+//            System.out.println(list);
+            String similiraty = getsimiliraty(userFeatures.get("features").toString(), list.toString());
+            recommendEntity.setSimiler(Float.valueOf(similiraty));
         }
         recommendEntities = ADsort(recommendEntities);
         return recommendEntities.get(0).getAdInfoEntity();
@@ -87,7 +96,8 @@ public class ADInfoServiceImpl implements ADInfoService {
      */
     public String getsimiliraty(String str1, String str2) {
         try {
-            String[] args = new String[]{"python3.6", "/Users/xujin/Desktop/毕业设计/implement_code/ad_sender/src/main/java/com/xujin/ad_sender/py/SimilarityCalculate.py", str1, str2};
+            String[] args = new String[]{"python3.6", "../ad_sender/src/main/java/com/xujin/ad_sender/py/SimilarityCalculate.py", str1, str2};
+//            String[] args = new String[]{"python3.5", "/root/test/py/SimilarityCalculate.py", str1, str2};
             System.out.println("start_calculate.................");
             Process pr = Runtime.getRuntime().exec(args);
             InputStreamReader inputStreamReader = new InputStreamReader(pr.getInputStream());
@@ -96,6 +106,7 @@ public class ADInfoServiceImpl implements ADInfoService {
             StringBuffer str = new StringBuffer();
             while ((t = bufferedReader.readLine()) != null) {
                 str.append(t);
+                System.out.println(t);
             }
             bufferedReader.close();
             inputStreamReader.close();

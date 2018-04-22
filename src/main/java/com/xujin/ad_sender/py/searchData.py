@@ -1,9 +1,10 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 from urllib import request
 from urllib.parse import quote
 from lxml import etree
 import ssl
 import sys
+
 # url_basic = 'https://www.baidu.com/s?wd=%s&pn=%s'
 _context = ssl._create_unverified_context()
 
@@ -15,7 +16,9 @@ def get_html(url, search_item, page_num):
                    'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 '
                    'Safari/537.36')
     response = request.urlopen(req, context=_context)
-    html = response.read().decode('utf-8').encode('GBK','ignore').decode('GBK')
+    # 解决windows乱码问题
+    # html = response.read().decode('utf-8').encode('GBK', 'ignore').decode('GBK')
+    html = response.read().decode('utf-8')
     with open('./search_page_%s.html' % page_num, 'w') as f:
         f.write(html)
 

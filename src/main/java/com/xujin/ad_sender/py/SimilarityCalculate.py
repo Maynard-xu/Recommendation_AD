@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
-import gensim, sys
+import gensim
+import sys
 
 
 def similarity(list1, list2):
@@ -8,6 +9,11 @@ def similarity(list1, list2):
     return model.n_similarity(list1, list2)
 
 
+# 测试
+# print(similarity(['篮球', '电影', '排球'], ['IT服务']))
+# print(eval("[计算机软件, 篮球, 电影, 排球]"))
 if __name__ == '__main__':
+    # eval将str转换成有效的Python表达式，例如将 "['women', 'girl']" 转化为 ['women', 'girl']
     similar = similarity(eval(sys.argv[1]), eval(sys.argv[2]))
     print(similar)
+    # print(similar)

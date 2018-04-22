@@ -30,10 +30,13 @@ public class IndexController {
     @PostMapping("/get_search")
     public List<String> get_search(String keyword, String PrePageNum) {
         try {
-            String[] args = new String[]{"python3.6", "/Users/xujin/Desktop/毕业设计/implement_code/ad_sender/src/main/java/com/xujin/ad_sender/py/searchData.py", keyword, PrePageNum};
+            String[] args = new String[]{"python3.6", "../ad_sender/src/main/java/com/xujin/ad_sender/py/searchData.py", keyword, PrePageNum};
+//            String[] args = new String[]{"python3.5", "/root/test/py/searchData.py", keyword, PrePageNum};
             System.out.println("start_search.................");
             Process pr = Runtime.getRuntime().exec(args);
-            InputStreamReader inputStreamReader = new InputStreamReader(pr.getInputStream(), "GBK");
+//            解决Windows乱码问题
+//            InputStreamReader inputStreamReader = new InputStreamReader(pr.getInputStream(), "GBK");
+            InputStreamReader inputStreamReader = new InputStreamReader(pr.getInputStream());
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String t;
             StringBuffer str = new StringBuffer();
@@ -65,11 +68,14 @@ public class IndexController {
         return search_list;
     }
 
-    @GetMapping("/getADimg")
-    public String getADimg(HttpSession session) {
-        String username = (String) session.getAttribute(session.getAttribute(WebSecurityConfig.SESSION_KEY).toString());
+    @GetMapping("/getRecommendAD")
+    public Map<String, Object> getADimg(HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        String username = session.getAttribute(WebSecurityConfig.SESSION_KEY).toString();
         ADInfoEntity recomAD = adInfoService.recommendAD(username);
-        return recomAD.getUploadPicture();
+        map.put("picture", recomAD.getUploadPicture());
+        map.put("describe", recomAD.getADDescribe());
+        return map;
     }
 }
 
