@@ -25,3 +25,4 @@ public class HobbyController {
         return hobbyService.InitHobby();
     }
 }
+

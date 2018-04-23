@@ -3,6 +3,7 @@ package com.xujin.ad_sender.service;
 import com.google.gson.*;
 import com.xujin.ad_sender.dao.ADInfoDao;
 import com.xujin.ad_sender.entity.ADInfoEntity;
+import com.xujin.ad_sender.entity.ConfigEntity;
 import com.xujin.ad_sender.entity.RecommendEntity;
 import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class ADInfoServiceImpl implements ADInfoService {
     ADInfoDao adInfoDao;
     @Autowired
     RegisterService registerService;
+    @Autowired
+    private ConfigEntity configEntity;
 
     @Override
     public List<ADInfoEntity> InitADInformation() {
@@ -56,9 +59,9 @@ public class ADInfoServiceImpl implements ADInfoService {
      * @return
      */
     @Override
-    public ADInfoEntity recommendAD(String UserName) {
+    public ADInfoEntity recommendAD(String UserName, String keyword) {
         List<RecommendEntity> recommendEntities = new ArrayList<>();
-        Map<String, Object> userFeatures = registerService.getUserFeatures(UserName);
+        Map<String, Object> userFeatures = registerService.getUserFeatures(UserName, keyword);
         System.out.println("userFeatures: " + userFeatures);
         //先跟据性别取出初始化的推荐列表
         List<ADInfoEntity> adList = adInfoDao.RecommendADList(userFeatures.get("sex").toString());
@@ -79,11 +82,12 @@ public class ADInfoServiceImpl implements ADInfoService {
             for (JsonElement i : ADClassesSelected) {
                 list.add("\'" + i.getAsString() + "\'");
             }
-//            System.out.println(list);
             String similiraty = getsimiliraty(userFeatures.get("features").toString(), list.toString());
+            System.out.println("similiraty:" + similiraty);
             recommendEntity.setSimiler(Float.valueOf(similiraty));
         }
         recommendEntities = ADsort(recommendEntities);
+        System.out.println(recommendEntities);
         return recommendEntities.get(0).getAdInfoEntity();
     }
 
@@ -96,8 +100,8 @@ public class ADInfoServiceImpl implements ADInfoService {
      */
     public String getsimiliraty(String str1, String str2) {
         try {
-            String[] args = new String[]{"python3.6", "../ad_sender/src/main/java/com/xujin/ad_sender/py/SimilarityCalculate.py", str1, str2};
-//            String[] args = new String[]{"python3.5", "/root/test/py/SimilarityCalculate.py", str1, str2};
+            String[] args = new String[]{"python3.6", configEntity.getService_config().get("similiratypath"), str1, str2};
+//            String[] args = new String[]{"python3.5", configEntity.getService_config().get("similiratypath"), str1, str2};
             System.out.println("start_calculate.................");
             Process pr = Runtime.getRuntime().exec(args);
             InputStreamReader inputStreamReader = new InputStreamReader(pr.getInputStream());
@@ -140,5 +144,4 @@ public class ADInfoServiceImpl implements ADInfoService {
         });
         return recommendEntities;
     }
-
 }

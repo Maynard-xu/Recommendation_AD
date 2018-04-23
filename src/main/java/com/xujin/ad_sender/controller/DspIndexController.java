@@ -2,6 +2,7 @@ package com.xujin.ad_sender.controller;
 
 import com.google.gson.Gson;
 import com.xujin.ad_sender.entity.ADInfoEntity;
+import com.xujin.ad_sender.entity.ConfigEntity;
 import com.xujin.ad_sender.service.ADInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,8 @@ import java.util.*;
 public class DspIndexController {
     @Autowired
     ADInfoService adInfoService;
+    @Autowired
+    private ConfigEntity configEntity;
 
     @GetMapping("/InitADInformation")
     public List<ADInfoEntity> InitADInformation() {
@@ -36,13 +39,12 @@ public class DspIndexController {
      * 提交图片
      *
      * @param file
-     * @param request
      * @return
      */
     @PostMapping("/upload")
-    public Map<String, Object> upload(MultipartFile file, HttpServletRequest request) {
+    public Map<String, Object> upload(MultipartFile file) {
         Map<String, Object> map = new HashMap<>();
-        String path = "/Users/xujin/Desktop/毕业设计/implement_code/ad_sender/src/main/resources/static/upload_images/";
+        String path = configEntity.getController_config().get("uploadpath");
         String fileName = file.getOriginalFilename();
         try {
             new FileWriter(path + fileName);

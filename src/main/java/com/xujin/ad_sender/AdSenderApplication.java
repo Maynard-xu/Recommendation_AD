@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 @SpringBootApplication
 public class AdSenderApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(AdSenderApplication.class, args);
     }

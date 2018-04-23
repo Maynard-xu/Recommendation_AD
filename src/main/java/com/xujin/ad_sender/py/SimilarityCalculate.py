@@ -16,4 +16,3 @@ if __name__ == '__main__':
     # eval将str转换成有效的Python表达式，例如将 "['women', 'girl']" 转化为 ['women', 'girl']
     similar = similarity(eval(sys.argv[1]), eval(sys.argv[2]))
     print(similar)
-    # print(similar)

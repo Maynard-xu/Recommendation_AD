@@ -44,7 +44,7 @@ public class RegisterEntity {
     public Integer getProfession() {
         return Profession;
     }
-//
+
     public void setProfession(Integer profession) {
         Profession = profession;
     }

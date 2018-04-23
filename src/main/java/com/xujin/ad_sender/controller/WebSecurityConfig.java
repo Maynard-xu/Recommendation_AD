@@ -64,5 +64,4 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
         }
     }
-
 }

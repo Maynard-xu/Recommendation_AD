@@ -3,6 +3,7 @@ package test.com.xujin.ad_sender.service;
 import com.xujin.ad_sender.AdSenderApplication;
 import com.xujin.ad_sender.dao.ADInfoDao;
 import com.xujin.ad_sender.entity.ADInfoEntity;
+import com.xujin.ad_sender.entity.ConfigEntity;
 import com.xujin.ad_sender.entity.RecommendEntity;
 import com.xujin.ad_sender.service.ADInfoServiceImpl;
 import com.xujin.ad_sender.service.RegisterService;
@@ -38,6 +39,8 @@ public class ADInfoServiceImplTest {
     RegisterService registerService;
     @Autowired
     ADInfoServiceImpl adInfoServiceimpl;
+    @Autowired
+    private ConfigEntity configEntity;
 
     @Before
     public void before() throws Exception {
@@ -52,7 +55,8 @@ public class ADInfoServiceImplTest {
      */
     @Test
     public void testInitADInformation() throws Exception {
-//TODO: Test goes here... 
+//TODO: Test goes here...
+        System.out.println(configEntity.getController_config().get("uploadpath"));
     }
 
     /**
@@ -84,7 +88,8 @@ public class ADInfoServiceImplTest {
      */
     @Test
     public void testRecommendAD() throws Exception {
-//TODO: Test goes here... 
+//TODO: Test goes here...
+
     }
 
     /**
@@ -123,9 +128,9 @@ public class ADInfoServiceImplTest {
      */
     @Test
     public void testADsort() throws Exception {
-        String UserName = "xu";
+        String UserName = "xu", keyword = "spring";
         List<RecommendEntity> recommendEntities = new ArrayList<>();
-        Map<String, Object> userFeatures = registerService.getUserFeatures(UserName);
+        Map<String, Object> userFeatures = registerService.getUserFeatures(UserName, keyword);
         List<ADInfoEntity> adList = adInfoDao.RecommendADList(userFeatures.get("sex").toString());
         System.out.println(adList);
         for (ADInfoEntity adInfoEntity : adList) {

@@ -1,12 +1,14 @@
 package com.xujin.ad_sender.controller;
 
 import com.xujin.ad_sender.entity.ADInfoEntity;
+import com.xujin.ad_sender.entity.ConfigEntity;
 import com.xujin.ad_sender.service.ADInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.Soundbank;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -26,12 +28,14 @@ import java.util.regex.Pattern;
 public class IndexController {
     @Autowired
     ADInfoService adInfoService;
+    @Autowired
+    private ConfigEntity configEntity;
 
     @PostMapping("/get_search")
     public List<String> get_search(String keyword, String PrePageNum) {
         try {
-            String[] args = new String[]{"python3.6", "../ad_sender/src/main/java/com/xujin/ad_sender/py/searchData.py", keyword, PrePageNum};
-//            String[] args = new String[]{"python3.5", "/root/test/py/searchData.py", keyword, PrePageNum};
+            String[] args = new String[]{"python3.6", configEntity.getController_config().get("searchpath"), keyword, PrePageNum};
+//            String[] args = new String[]{"python3.5", configEntity.getController_config().get("searchpath"), keyword, PrePageNum};
             System.out.println("start_search.................");
             Process pr = Runtime.getRuntime().exec(args);
 //            解决Windows乱码问题
@@ -69,10 +73,10 @@ public class IndexController {
     }
 
     @GetMapping("/getRecommendAD")
-    public Map<String, Object> getADimg(HttpSession session) {
+    public Map<String, Object> getADimg(HttpSession session, String keyword) {
         Map<String, Object> map = new HashMap<>();
         String username = session.getAttribute(WebSecurityConfig.SESSION_KEY).toString();
-        ADInfoEntity recomAD = adInfoService.recommendAD(username);
+        ADInfoEntity recomAD = adInfoService.recommendAD(username, keyword);
         map.put("picture", recomAD.getUploadPicture());
         map.put("describe", recomAD.getADDescribe());
         return map;

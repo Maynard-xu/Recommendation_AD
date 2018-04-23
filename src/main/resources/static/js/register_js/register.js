@@ -26,8 +26,6 @@ $(function () {
         //进行ajax请求
         Register(UserName, PassWord, Profession, Sex, Age, HobbyJson);
     });
-
-
 });
 
 /**

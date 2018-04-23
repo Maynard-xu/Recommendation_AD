@@ -2,9 +2,17 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
 #    url: jdbc:mysql://172.17.160.166:3306/recommendation_ad?useUnicode=true&characterEncoding=utf8&useSSL=true
-    url: jdbc:mysql://127.0.0.1:3306/recommendation_ad?useUnicode=true&characterEncoding=utf8&useSSL=true
+#    url: jdbc:mysql://127.0.0.1:3306/recommendation_ad?useUnicode=true&characterEncoding=utf8&useSSL=true
+    url: jdbc:mysql://39.107.225.177:3306/recommendation_ad?useUnicode=true&characterEncoding=utf8&useSSL=true
     username: root
     password: mysqlxujin
 logging:
   level: debug
 #?useUnicode=true&characterEncoding=utf-8
+
+myADConfig:
+  controller_config:
+    uploadpath: "../ad_sender/src/main/resources/static/upload_images/"
+    searchpath: "../ad_sender/src/main/java/com/xujin/ad_sender/py/searchData.py"
+  service_config:
+    similiratypath: "../ad_sender/src/main/java/com/xujin/ad_sender/py/SimilarityCalculate.py"

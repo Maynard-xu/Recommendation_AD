@@ -28,5 +28,4 @@ public class ProfessionServiceImpl implements ProfessionService {
     public String selectProfessionNameByProfessionId(int professionid) {
         return professionDao.selectProfessionNameByProfessionId(professionid) ;
     }
-
 }

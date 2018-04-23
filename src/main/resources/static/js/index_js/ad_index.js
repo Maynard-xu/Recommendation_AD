@@ -19,7 +19,7 @@ function Search(ev) {
  */
 function get_search(keyword) {
     $('#content_list').empty();
-    recommend_AD();
+    recommend_AD(keyword);
     $.ajax({
         type: 'POST',
         url: '/index/get_search',
@@ -60,18 +60,15 @@ function click_span(obj) {
 /**
  * 获取推荐广告
  */
-function recommend_AD() {
+function recommend_AD(keyword) {
     console.log('----------------');
-    // $.getJSON("/index/getADimg", function (data) {
-    //     console.log(data);
-    //     $("#ad_img").attr("src", data);
-    // });
     $.ajax({
         type: 'GET',
         url: '/index/getRecommendAD',
+        data: {
+            'keyword': keyword
+        },
         success: function (data) {
-            // console.log(data['picture']);
-            // console.log(data['describe']);
             $("#ad_img").attr("src", data['picture']);
             $("#ad_describe p").text(data['describe']);
         }
@@ -83,5 +80,5 @@ function recommend_AD() {
  * 页面加载完成后运行函数
  */
 $(function () {
-    recommend_AD();
+    recommend_AD("");
 });

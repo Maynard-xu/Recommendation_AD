@@ -10,5 +10,4 @@ public interface UserService {
      * @return
      */
     UserEntity searchUserByName(String username);
-
 }

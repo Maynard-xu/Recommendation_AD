@@ -50,10 +50,4 @@ public class RegisterController {
         }
         return map;
     }
-
-//    @GetMapping("/getAllProfession")
-//    public List<ProfessionDao> getAllProfession(){
-//        List<ProfessionDao>
-//        return ;
-//    }
 }

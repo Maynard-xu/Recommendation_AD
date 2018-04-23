@@ -9,5 +9,3 @@ public interface HobbyService {
     List<HobbyEntity> InitHobby();
 
 }
-
-

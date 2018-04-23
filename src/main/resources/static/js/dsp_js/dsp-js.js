@@ -78,14 +78,16 @@ function addADInfo() {
 function initADList() {
     $.getJSON("/dsp/InitADInformation", function (data) {
         var tbody = $("#ad_list");
+        var num = 0;
         for (var i in data) {
+            num++;
             tbody.append(
                 '<tr>' +
-                '<td align="center">' + data[i]["adid"] + '</td>' +
-                '<td align="center" style="width:222px">' + data[i]["adtitle"] + '</td>' +
-                '<td align="center">' + JSON.parse(data[i]["adclasses"])["ADClassesSelected"] + '</td>' +
-                '<td align="center" style="width:180px">' + data[i]["addescribe"] + '</td>' +
-                '<td align="center">' + data[i]["rtbprice"] + '</td>' +
+                '<td align="center">' + num + '</td>' +
+                '<td align="center" style="width:200px">' + data[i]["adtitle"] + '</td>' +
+                '<td align="center" style="width:200px">' + JSON.parse(data[i]["adclasses"])["ADClassesSelected"] + '</td>' +
+                '<td align="center">' + data[i]["addescribe"] + '</td>' +
+                '<td align="center" style="width:200px">' + data[i]["rtbprice"] + '</td>' +
                 '<td style="width:200px">' +
                 '<div class="operation text-center">' +
                 '<!--编辑广告部分内容-->' +
@@ -136,7 +138,7 @@ function initADList() {
                 '</div>' +
                 '</div>' +
                 '</div>' +
-                '<button type="button" class="btn btn-sm btn-danger"  onclick="deleteADInfo(this)">删除</button>' +
+                '<button type="button" class="btn btn-sm btn-danger" id="delete_' + data[i]["adid"] + '" onclick="deleteADInfo(this)">删除</button>' +
                 '</div>' +
                 '</td>' +
                 '</tr>'
@@ -194,7 +196,7 @@ function updateADInfo(obj) {
     var ADClassesSelected = [];
     ADClassesList.each(function () {
         if ($(this).is(":checked")) {
-            ADClassesSelected.push(this.value);
+            ADClassesSelected.push(this.nextSibling.nodeValue);
         }
     });
     ADClasses["ADClassesSelected"] = ADClassesSelected;
@@ -234,7 +236,9 @@ function updateADInfo(obj) {
  * @param obj
  */
 function deleteADInfo(obj) {
-    var ADID = $(obj).parent().parent().siblings().first().text();
+    // var ADID = $(obj).parent().parent().siblings().first().text();
+    var ADID = $(obj).attr("id").split('_')[1];
+    // alert(ADID);
     $(obj).parent().parent().parent().remove();
     $.ajax({
         method: "post",

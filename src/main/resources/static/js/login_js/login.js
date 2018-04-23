@@ -38,5 +38,4 @@ $(function () {
         // $(location).attr("href", "ad_register.html")
         window.location.href = '/ad_register';
     });
-
 });

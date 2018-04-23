@@ -47,8 +47,8 @@ public class RegisterServiceImplTest {
      */
     @Test
     public void testGetUserFeatures() throws Exception {
-        String user = "xu";
-        Map<String, Object> map = registerService.getUserFeatures(user);
+        String user = "xu", keyword = "spring";
+        Map<String, Object> map = registerService.getUserFeatures(user, keyword);
         System.out.println(map);
 //TODO: Test goes here... 
     }

@@ -13,6 +13,5 @@ public interface RegisterService {
      */
     void register(RegisterEntity registerEntity);
 
-    Map<String, Object> getUserFeatures(String UserName);
-
+    Map<String, Object> getUserFeatures(String UserName, String keyword);
 }

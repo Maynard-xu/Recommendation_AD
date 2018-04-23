@@ -7,10 +7,7 @@ import com.google.gson.JsonParser;
 import com.xujin.ad_sender.dao.ProfessionDao;
 import com.xujin.ad_sender.dao.RegisterDao;
 import com.xujin.ad_sender.entity.RegisterEntity;
-import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonObjectDeserializer;
-import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,11 +37,14 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public Map<String, Object> getUserFeatures(String UserName) {
+    public Map<String, Object> getUserFeatures(String UserName, String keyword) {
         Map<String, Object> map = new HashMap<>();
         List<String> features = new ArrayList<>();
         RegisterEntity registerEntity = registerDao.getUserByUserName(UserName);
         String ProfessionName = professionDao.selectProfessionNameByProfessionId(registerEntity.getProfession());
+        if (keyword != "") {
+            features.add("\'" + keyword + "\'");
+        }
         features.add("\'" + ProfessionName + "\'");
         JsonParser jsonParser = new JsonParser();
         JsonElement parse = jsonParser.parse(registerEntity.getHobby());
@@ -53,9 +53,6 @@ public class RegisterServiceImpl implements RegisterService {
         for (JsonElement i : hobbySelected) {
             features.add("\'" + i.getAsString() + "\'");
         }
-//        //
-//        System.out.println(features);
-//        //
         if (registerEntity.getAge() > 13 && registerEntity.getAge() < 18) {
             map.put("SelectCrowd", "青少年(13~18)");
         } else if (registerEntity.getAge() > 18 && registerEntity.getAge() < 30) {
@@ -69,5 +66,4 @@ public class RegisterServiceImpl implements RegisterService {
         map.put("sex", registerEntity.getSex());
         return map;
     }
-
 }

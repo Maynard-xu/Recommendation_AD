@@ -13,5 +13,5 @@ public interface ADInfoService {
 
     void deleteADInfo(Integer ADID);
 
-    ADInfoEntity recommendAD(String UserName);
+    ADInfoEntity recommendAD(String UserName, String keyword);
 }

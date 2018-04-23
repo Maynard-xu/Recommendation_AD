@@ -24,7 +24,5 @@ jQuery(function ($) {
             {image: 'images/login_images/2.jpg'},
             {image: 'images/login_images/3.jpg'}
         ]
-
     });
-
 });
