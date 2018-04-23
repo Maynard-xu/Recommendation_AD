@@ -5,7 +5,7 @@ import sys
 
 def similarity(list1, list2):
     model = gensim.models.Word2Vec.load(
-        '/Users/xujin/Desktop/毕业设计/implement_code/ad_sender/src/main/java/com/xujin/ad_sender/py/word2vec.modal')
+        '/Users/xujin/Desktop/毕业设计/implement_code/Accommandation_AD/src/main/java/com/xujin/ad_sender/py/word2vec.modal')
     return model.n_similarity(list1, list2)
 
 

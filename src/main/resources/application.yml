@@ -12,7 +12,7 @@ logging:
 
 myADConfig:
   controller_config:
-    uploadpath: "../ad_sender/src/main/resources/static/upload_images/"
-    searchpath: "../ad_sender/src/main/java/com/xujin/ad_sender/py/searchData.py"
+    uploadpath: "../Accommandation_AD/src/main/resources/static/upload_images/"
+    searchpath: "../Accommandation_AD/src/main/java/com/xujin/ad_sender/py/searchData.py"
   service_config:
-    similiratypath: "../ad_sender/src/main/java/com/xujin/ad_sender/py/SimilarityCalculate.py"
+    similiratypath: "../Accommandation_AD/src/main/java/com/xujin/ad_sender/py/SimilarityCalculate.py"
