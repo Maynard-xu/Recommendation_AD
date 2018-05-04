@@ -16,7 +16,9 @@ function login(userName, password) {
             if (e.code == 200) {
                 alert("Login successfully!" + " Welcome !");
                 window.location.href = '/ad_index';
-            } else {
+            }else if(e.code == 201){
+                window.location.href = '/ad_dsp_index';
+            }else {
                 alert(e.message)
             }
         },

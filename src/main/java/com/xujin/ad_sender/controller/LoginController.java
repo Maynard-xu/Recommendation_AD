@@ -83,17 +83,25 @@ public class LoginController {
     @ResponseBody
     @PostMapping("/login")
     public Map<String, Object> login(String userName, String password, HttpSession session) {
-        System.out.println(userName + password);
+        System.out.println("输入的用户名和密码：" + userName + password);
         Map<String, Object> map = new HashMap<>();
         UserEntity user = userService.searchUserByName(userName);
-        System.out.println(user.getUserName() + user.getPassWord());
+        System.out.println("数据库中的用户名和密码：" + user.getUserName() + user.getPassWord());
         if (user != null) {
             if (password.equals(user.getPassWord())) {
-                session.setAttribute(WebSecurityConfig.SESSION_KEY, userName);
-                map.put("success", true);
-                map.put("message", "login in successful");
-                map.put("code", "200");
-                return map;
+                if (userName.equals("admin")) {
+//                    session.setAttribute(WebSecurityConfig.SESSION_KEY, userName);
+                    map.put("success", true);
+                    map.put("message", "login in successful");
+                    map.put("code", "201");
+                    return map;
+                } else {
+                    session.setAttribute(WebSecurityConfig.SESSION_KEY, userName);
+                    map.put("success", true);
+                    map.put("message", "login in successful");
+                    map.put("code", "200");
+                    return map;
+                }
             } else {
                 map.put("success", false);
                 map.put("message", "Username or password false");
